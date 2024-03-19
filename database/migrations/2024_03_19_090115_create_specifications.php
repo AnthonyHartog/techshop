@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('specifications', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('cpu');
+            $table->string('gpu');
+            $table->string('ram');
         });
     }
 
