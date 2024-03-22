@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SpecificationController;
 use App\Models\Specification;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
 
-    Route::resource('/admin/specification', Specification::class);
+    Route::resource('/admin/specification', SpecificationController::class);
 });
 
 require __DIR__.'/auth.php';
