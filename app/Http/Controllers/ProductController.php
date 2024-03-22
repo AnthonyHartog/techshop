@@ -57,9 +57,12 @@ class ProductController extends Controller
         if($request->delete_specifications != NULL){
             foreach($request->delete_specifications as $specification_id){
                 $specification = Specification::find($specification_id);
-                if(Product::where('specification_id', $specification_id) != NULL){
+                if(Product::where('specification_id', $specification_id)->count() != 0){
                     return redirect()->back()->withInput()->with('specification_delete', 'De specificatie die je probeert te verwijderen is nog gekoppeld aan een product');
-                }else{
+                }else if($request->specification_id == $specification_id){
+                    return redirect()->back()->withInput()->with('specification_delete', 'Je probeerd de specificatie te verwijderen die je geselecteerd heb');
+                }
+                else{
                     $specification->delete();
                 }
             }
