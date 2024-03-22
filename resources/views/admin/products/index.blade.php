@@ -6,7 +6,7 @@
         <div class="grid gap-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
             @foreach ($products as $product)
             <div class="flex flex-col">
-                <a href="">
+                <a href="{{route('admin.products.edit', [$product->id, $product->name])}}">
                     <div class="shadow-lg p-4">
                         <div class="up">
                             <img class="" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
