@@ -73,19 +73,19 @@
                                             <div class="create">
                                                 <input class="p-2" class="font-bold" type="radio" name="specification" id="">
                                             </div>
-                                            <div class="delete">
-                                                <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('specification.destroy', $specification->id) }}" method="Post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="text-red-600" onclick="return confirm('Wilt u zeker weten deze specificatie verwijderen?');">Verwijder specificatie</button>
-                                                </form>
+                                            <div class="flex items-center">
+                                                <label class="text-red-600 mr-2" for="delete-specifications[]">Verwijder specificatie</label>
+                                                <input type="checkbox" name="delete-specifications[]" value="{{$specification->id}}" onclick="if (this.checked) { alert('Als je dit hebt aangevinkt wordt het verwijderd. Ook als je een nieuwe wilt aanmaken.'); }">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
+                    </div>
 
+                    <div class="flex">
+                        <p class="font-bold mt-8">Specificaties die worden verwijderd: <span class="text-red-600" id="delete-counter">0</span></p>
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@
                 @error('image')
                     <div class="text-red-600 mb-10">{{ $message }}</div>
                 @enderror
-                <input class="mt-8 mb-8 bg-cyan-600 p-2 pl-4 pr-4 rounded-md" type="submit" value="Product aanmaken" name="" id="">
+                <button class="mt-8 mb-8 bg-cyan-600 p-2 pl-4 pr-4 rounded-md">Product aanmaken</button>
             </form>
         </div>
     </div>
@@ -132,16 +132,21 @@
             createDiv.style.display = "none";
             chooseDiv.style.display = "block";
         }
-
-        // if(multiple.checked){
-        //     multipleForm.style.display = "block";
-        //     openForm.style.display = "none";
-        // }
-        // else if(open.checked){
-        //     openForm.style.display = "block";
-        //     multipleForm.style.display = "none";
-        // }
     }
+
+
+    // Functie om het aantal geselecteerde checkboxes te tellen
+    function updateDeleteCounter() {
+        const checkboxes = document.querySelectorAll('input[name="delete-specifications[]"]:checked');
+        const deleteCounter = document.getElementById('delete-counter');
+        deleteCounter.textContent = checkboxes.length;
+    }
+
+        // Voeg een 'change'-eventlistener toe aan alle checkboxes met de naam 'delete-specifications[]'
+    const deleteCheckboxes = document.querySelectorAll('input[name="delete-specifications[]"]');
+    deleteCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateDeleteCounter);
+    });
 
     function displaySelectedImages(input) {
         var previewContainer = document.getElementById('image-preview-container');
