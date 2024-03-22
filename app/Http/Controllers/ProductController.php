@@ -52,11 +52,56 @@ class ProductController extends Controller
             'filters' => 'required|array'
         ]);
 
+        if($request->delete_specifications != NULL){
+            foreach($request->delete_specifications as $specification_id){
+                $specification = Specification::find($specification_id);
+                if(Product::where('specification_id', $specification_id) != NULL){
+                    return redirect()->back()->withInput()->with('specification_delete', 'De specificatie die je probeert te verwijderen is nog gekoppeld aan een product');
+                }else{
+                    $specification->delete();
+                }
+            }
+        }
+
+        if($request->specification_type == 'create'){
+            $request->validate([
+                'cpu'=> 'required',
+                'gpu' => 'required',
+                'ram' => 'required',
+            ]);
+
+            $specification = Specification::create([
+                'cpu' => $request->cpu,
+                'gpu' => $request->gpu,
+                'ram' => $request->ram
+            ]);
+
+            $specification_id = $specification->id;
+        }
+        else if($request->specification_type == 'choose'){
+            $specification_id = $request->specification_id;
+        }else{
+            return redirect()->back()->withInput();
+        }
+
+        $faker = \Faker\Factory::create('nl_NL');
+        $imgName = $faker->numberBetween(10000, 200000) . $request->image->getClientOriginalName();
+
+        $request->file('image')
+        ->storeAs('public', $imgName);
+
         $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
-
+            'description' => $request->description,
+            'specification_id' => $specification_id,
+            'img' => $imgName
         ]);
+
+        foreach($request->filters as $id){
+            $filter = Filter::find($id);
+            $product->filters()->attach($filter);
+        }
 
     }
 

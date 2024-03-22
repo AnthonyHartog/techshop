@@ -62,20 +62,23 @@
                         </div>
                     </div>
                     <div class="choose-specification">
+                        @if (\Session::has('error'))
+                            <p class="text-red-600">{!! \Session::get('specification_delete') !!}</p>
+                        @endif
                         <div class="grid gap-8" style="grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%">
                             @foreach($specifications as $specification)
-                                <div class="card w-96 bg-base-100 shadow-xl">
+                                <div class="card bg-base-100 shadow-xl">
                                     <div class="card-body">
                                         <p><span class="font-bold">CPU </span>{{$specification->cpu}}</p>
                                         <p><span class="font-bold">GPU </span>{{$specification->gpu}}</p>
                                         <p><span class="font-bold">RAM </span>{{$specification->ram}}</p>
                                         <div class="card-actions justify-between items-center">
                                             <div class="create">
-                                                <input class="p-2" class="font-bold" type="radio" name="specification" id="">
+                                                <input class="p-2" class="font-bold" type="radio" name="specification_id" value="{{$specification->id}}">
                                             </div>
                                             <div class="flex items-center">
                                                 <label class="text-red-600 mr-2" for="delete-specifications[]">Verwijder specificatie</label>
-                                                <input type="checkbox" name="delete-specifications[]" value="{{$specification->id}}" onclick="if (this.checked) { alert('Als je dit hebt aangevinkt wordt het verwijderd. Ook als je een nieuwe wilt aanmaken.'); }">
+                                                <input type="checkbox" name="delete_specifications[]" value="{{$specification->id}}" onclick="if (this.checked) { alert('Als je dit hebt aangevinkt wordt het verwijderd. Ook als je een nieuwe wilt aanmaken.'); }">
                                             </div>
                                         </div>
                                     </div>
@@ -83,13 +86,10 @@
                             @endforeach
                         </div>
                     </div>
-
                     <div class="flex">
                         <p class="font-bold mt-8">Specificaties die worden verwijderd: <span class="text-red-600" id="delete-counter">0</span></p>
                     </div>
                 </div>
-
-
                 <div class="mt-8 w-72">
                     <p class="mb-1 font-bold">Filters</p>
                     @error('filters')
@@ -98,7 +98,7 @@
                     <div class="grid grid-cols-3 gap-2">
                         @foreach($filters as $filter)
                             <div class="filter-input">
-                                <input type="checkbox" name="filters[]" id="" switch>
+                                <input type="checkbox" name="filters[]" value="{{$filter->id}}" switch>
                                 <label for="filter">{{$filter->name}}</label>
                             </div>
                         @endforeach
