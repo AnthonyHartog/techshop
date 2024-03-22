@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="choose-specification">
-                        @if (\Session::has('error'))
+                        @if (\Session::has('specification_delete'))
                             <p class="text-red-600">{!! \Session::get('specification_delete') !!}</p>
                         @endif
                         <div class="grid gap-8" style="grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%">
