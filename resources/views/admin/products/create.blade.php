@@ -8,25 +8,28 @@
                 @csrf
                 <div class="flex justify-between">
                     <div class="">
-                        <p>Naam</p>
+                        <p class="mb-1 font-bold">Naam</p>
                         <input style="width: 500px" type="text" name="name" placeholder="Naam">
                     </div>
                     <div class="">
-                        <p>Prijs</p>
+                        <p class="mb-1 font-bold">Prijs</p>
                         <input style="width: 500px" type="number" name="name" min="0" placeholder="Naam">
                     </div>
                 </div>
                 <div class="mt-8">
-                    <p>Beschrijving</p>
+                    <p class="mb-1 font-bold">Beschrijving</p>
                     <textarea style="width: 100%" name="description" id="" cols="30" rows="10">Beschrijving....</textarea>
                 </div>
-                <div class="grid grid-cols-3 gap-2 mt-8 w-72">
-                    @foreach($filters as $filter)
-                        <div class="filter-input">
-                            <input type="checkbox" name="filters[]" id="" switch>
-                            <label for="filter">{{$filter->name}}</label>
-                        </div>
-                    @endforeach
+                <div class="mt-8 w-72">
+                    <p class="mb-1 font-bold">Filters</p>
+                    <div class="grid grid-cols-3 gap-2">
+                        @foreach($filters as $filter)
+                            <div class="filter-input">
+                                <input type="checkbox" name="filters[]" id="" switch>
+                                <label for="filter">{{$filter->name}}</label>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="mt-8">
                     <input id="image" type="file" name="image"/>
