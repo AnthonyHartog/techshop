@@ -105,8 +105,8 @@
                     </div>
                 </div>
                 <label class="mt-8 pt-8 pb-8 bg-cyan-100 shadow-lg" style="cursor: pointer; display: flex; justify-content: center;">
-                    <input style="width: 100%; display: none;" name="image" type="file" accept="image/*" onchange="displaySelectedImages(this)"/>
-                    <img id="image" src="{{asset('img/add-image.png')}}" alt="">
+                    <input style="width: 100%; display: none;" name="image" type="file" accept="image/*" onchange="displaySelectedImages(this)" value="{{$product->img}}"/>
+                    <img id="image" src="{{asset('storage/' . $product->img)}}" alt="">
                     <div id="image-preview-container"></div>
                 </label>
                 @error('image')
