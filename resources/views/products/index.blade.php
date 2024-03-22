@@ -14,7 +14,7 @@
         <div class="">
             <div class="grid gap-4" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
                 @foreach ($products as $product)
-                <a href="">
+                <a href="{{route('product.show', [$product->id, $product->name])}}">
                     <div class="shadow-lg p-4">
                         <img class="" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
                         <div class="flex justify-between">

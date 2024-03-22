@@ -23,7 +23,8 @@ class ProductController extends Controller
      */
     public function adminIndex()
     {
-        return view('admin.products.index');
+        $products = Product::all();
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -45,8 +46,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product, string $productName)
+    public function show(string $id, string $productName)
     {
+        $product = Product::find($id);
         return view('products.show', compact('product'));
     }
 
