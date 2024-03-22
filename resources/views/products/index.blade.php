@@ -4,8 +4,8 @@
             <div class="border-black border border-solid mr-8 p-4">
                 @foreach($filters as $filter)
                 <div class="filter">
-                    <label for="filter">{{$filter->name}}</label>
                     <input type="checkbox" name="filter" id="" switch>
+                    <label for="filter">{{$filter->name}}</label>
                 </div>
                 @endforeach
                 <button class="bg-cyan-300 p2- pr-4 pl-4 mt-4 rounded-md">Filter</button>

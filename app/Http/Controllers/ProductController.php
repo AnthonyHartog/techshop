@@ -32,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $filters = Filter::all();
+        return view('admin.products.create', compact('filters'));
     }
 
     /**
