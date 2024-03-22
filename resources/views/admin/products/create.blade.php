@@ -4,7 +4,8 @@
             <h1 class="text-2xl font-bold mb-2">Product toevoegen</h1>
         </div>
         <div class="">
-            <form action="" method="POST">
+            <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="flex justify-between">
                     <div class="">
                         <p>Naam</p>
@@ -19,7 +20,7 @@
                     <p>Beschrijving</p>
                     <textarea style="width: 100%" name="description" id="" cols="30" rows="10">Beschrijving....</textarea>
                 </div>
-                <div class="flex flex-col mt-8">
+                <div class="grid grid-cols-3 gap-2 mt-8 w-72">
                     @foreach($filters as $filter)
                         <div class="filter-input">
                             <input type="checkbox" name="filters[]" id="" switch>
