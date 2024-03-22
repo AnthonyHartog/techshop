@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="flex items-center">
                                                 <label class="text-red-600 mr-2" for="delete-specifications[]">Verwijder specificatie</label>
-                                                <input type="checkbox" name="delete_specifications[]" value="{{$specification->id}}" onclick="if (this.checked) { alert('Als je dit hebt aangevinkt wordt het verwijderd. Ook als je een nieuwe wilt aanmaken.'); }">
+                                                <input class="delete_specification" type="checkbox" name="delete_specifications[]" value="{{$specification->id}}" onclick="updateDeleteCounter(); if (this.checked) { alert('Als je dit hebt aangevinkt wordt het verwijderd. Ook als je een nieuwe wilt aanmaken.'); }">
                                             </div>
                                         </div>
                                     </div>
@@ -123,6 +123,8 @@
     const createDiv = document.querySelector('.create-specification');
     const chooseDiv = document.querySelector('.choose-specification');
 
+    const deleteCounter = document.getElementById('delete-counter');
+
     function check_type() {
         if(create.checked){
             createDiv.style.display = "block";
@@ -134,19 +136,11 @@
         }
     }
 
-
-    // Functie om het aantal geselecteerde checkboxes te tellen
-    function updateDeleteCounter() {
-        const checkboxes = document.querySelectorAll('input[name="delete-specifications[]"]:checked');
-        const deleteCounter = document.getElementById('delete-counter');
+    //Update de delete counter hoeveel specificaties er worden verwijderd
+    function updateDeleteCounter(){
+        let checkboxes = document.querySelectorAll('.delete_specification:checked');
         deleteCounter.textContent = checkboxes.length;
     }
-
-        // Voeg een 'change'-eventlistener toe aan alle checkboxes met de naam 'delete-specifications[]'
-    const deleteCheckboxes = document.querySelectorAll('input[name="delete-specifications[]"]');
-    deleteCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateDeleteCounter);
-    });
 
     function displaySelectedImages(input) {
         var previewContainer = document.getElementById('image-preview-container');
