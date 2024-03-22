@@ -18,7 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('products', ProductController::class);
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{id}/{productName}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');
 
