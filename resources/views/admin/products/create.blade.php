@@ -9,11 +9,11 @@
                 <div class="flex justify-between">
                     <div class="">
                         <p>Naam</p>
-                        <input style="width: 500px" type="text" name="name" id="" placeholder="Naam">
+                        <input style="width: 500px" type="text" name="name" placeholder="Naam">
                     </div>
                     <div class="">
                         <p>Prijs</p>
-                        <input style="width: 500px" type="number" name="name" id="" placeholder="Naam">
+                        <input style="width: 500px" type="number" name="name" min="0" placeholder="Naam">
                     </div>
                 </div>
                 <div class="mt-8">
