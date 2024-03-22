@@ -51,6 +51,18 @@ class DatabaseSeeder extends Seeder
             'description' => 'Dit is een voorbeeldproduct 2.',
         ]);
 
+        Product::create([
+            'name' => 'ASUS Gaming 2023 PRO 2',
+            'price' => 100,
+            'description' => 'Dit is een voorbeeldproduct 1.',
+        ]);
+
+        Product::create([
+            'name' => 'Linux laptop 2',
+            'price' => 200,
+            'description' => 'Dit is een voorbeeldproduct 2.',
+        ]);
+
         Filter::create([
             'name' => 'Work',
         ]);
@@ -83,5 +95,6 @@ class DatabaseSeeder extends Seeder
             'filter_id' => 1,
             'product_id' => 1,
         ]);
+        
     }
 }
