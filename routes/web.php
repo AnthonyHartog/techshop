@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::delete('/admin/delete/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::resource('/admin/specification', SpecificationController::class);
 });

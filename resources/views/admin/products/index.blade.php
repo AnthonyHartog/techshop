@@ -18,7 +18,7 @@
                     </div>
                 </a>
                 <div class="verwijderen">
-                    <form action="" method="Post">
+                    <form action="{{route('admin.products.destroy', $product->id)}}" method="Post">
                         @csrf
                         @method('DELETE')
                         <button class="text-red-500 font-bold" type="submit" onclick="return confirm('Weet u zeker dat u het product wilt verwijderen?');">Verwijderen</button>

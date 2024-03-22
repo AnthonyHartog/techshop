@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Amount;
 use App\Models\Filter;
 use App\Models\Product;
 use App\Models\Specification;
 use Illuminate\Http\Request;
+use PDO;
 
 class ProductController extends Controller
 {
@@ -103,6 +105,7 @@ class ProductController extends Controller
             $product->filters()->attach($filter);
         }
 
+        return redirect()->route('admin.products.index');   
     }
 
     /**
@@ -133,8 +136,16 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->filters()->detach();
+        $amounts = Amount::where('product_id', $product->id)->get();
+        foreach($amounts as $amount){
+            $amount->delete();
+        }
+
+        $product->delete();
+
+        return redirect()->route('admin.products.index');   
     }
 }
