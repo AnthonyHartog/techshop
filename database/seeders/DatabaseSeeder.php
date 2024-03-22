@@ -40,24 +40,28 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Product::create([
+            'specification_id' => 1,
             'name' => 'ASUS Gaming 2023 PRO',
             'price' => 100,
             'description' => 'Dit is een voorbeeldproduct 1.',
         ]);
 
         Product::create([
+            'specification_id' => 2,
             'name' => 'Linux laptop',
             'price' => 200,
             'description' => 'Dit is een voorbeeldproduct 2.',
         ]);
 
         Product::create([
+            'specification_id' => 1,
             'name' => 'ASUS Gaming 2023 PRO 2',
             'price' => 100,
             'description' => 'Dit is een voorbeeldproduct 1.',
         ]);
 
         Product::create([
+            'specification_id' => 2,
             'name' => 'Linux laptop 2',
             'price' => 200,
             'description' => 'Dit is een voorbeeldproduct 2.',
