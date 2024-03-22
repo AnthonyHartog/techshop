@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Filter;
 use App\Models\Product;
+use App\Models\Specification;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -33,7 +34,9 @@ class ProductController extends Controller
     public function create()
     {
         $filters = Filter::all();
-        return view('admin.products.create', compact('filters'));
+        $specifications = Specification::all();
+
+        return view('admin.products.create', compact('filters', 'specifications'));
     }
 
     /**
@@ -41,7 +44,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'name' => 'required|min:3',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|min:10',
+            'image' => 'required',
+            'filters' => 'required|array'
+        ]);
+
+        $product = Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+
+        ]);
+
     }
 
     /**
