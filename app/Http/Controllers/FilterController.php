@@ -29,7 +29,19 @@ class FilterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        if(Filter::where('name', $request->name)->count() != 0){
+            return redirect()->back()->withInput()->with('error_create', 'Deze filter bestaat al');
+        }
+
+        Filter::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('filters.index');   
     }
 
     /**

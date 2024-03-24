@@ -43,7 +43,6 @@
                             <label for="choose">Specificatie kiezen</label>
                         </div>
                     </div>
-
                     <div class="create-specification" style="display:none;">
                         <div class="card w-1/4 bg-base-100 shadow-xl">
                             <div class="card-body">
