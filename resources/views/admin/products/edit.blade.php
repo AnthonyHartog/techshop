@@ -4,8 +4,9 @@
             <h1 class="text-2xl font-bold mb-2">Product aanpassen</h1>
         </div>
         <div class="">
-            <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('admin.products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="bg-slate-200 p-4 shadow-lg rounded-md">
                     <div class="flex justify-between">
                         <div class="">
@@ -117,6 +118,7 @@
                 @error('image')
                     <div class="text-red-600 mb-10">{{ $message }}</div>
                 @enderror
+                <input type="hidden" name="id" value="{{ $product->id }}">
                 <button class="mt-8 mb-8 bg-cyan-600 p-2 pl-4 pr-4 rounded-md">Product aanpassen</button>
             </form>
         </div>
