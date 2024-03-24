@@ -124,11 +124,11 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($productId)
     {
+        $product = Product::find($productId);
         $filters = Filter::all();
         $specifications = Specification::all();
-        $product = $product->first();
 
         return view('admin.products.edit', compact('filters', 'specifications', 'product'));
     }

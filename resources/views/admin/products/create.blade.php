@@ -101,7 +101,7 @@
                             <div class="grid grid-cols-3 gap-2 mt-8 w-72">
                                 @foreach($filters as $filter)
                                     <div class="filter-input">
-                                        <input class="bg-gray-500 border-none rounded-md" type="checkbox" name="filters[]" value="{{$filter->id}}" switch>
+                                        <input class="bg-gray-500 border-none rounded-md" type="checkbox" name="filters[]" value="{{$filter->id}}">
                                         <label for="filter">{{$filter->name}}</label>
                                     </div>
                                 @endforeach
