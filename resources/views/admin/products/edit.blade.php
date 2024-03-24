@@ -6,31 +6,32 @@
         <div class="">
             <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="flex justify-between">
-                    <div class="">
-                        <p class="mb-1 font-bold">Naam</p>
-                        <input style="width: 500px" type="text" name="name" value="{{$product->name}}">
-                        @error('name')
+                <div class="bg-slate-200 p-4 shadow-lg rounded-md">
+                    <div class="flex justify-between">
+                        <div class="">
+                            <p class="mb-1 font-bold">Naam</p>
+                            <input class="bg-gray-300 text-black placeholder-gray-500 border-none rounded-md shadow-sm" style="width: 500px" type="text" name="name" value="{{$product->name}}">
+                            @error('name')
+                                <div class="text-red-600">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="">
+                            <p class="mb-1 font-bold">Prijs</p>
+                            <input class="bg-gray-300 text-black placeholder-gray-500 border-none rounded-md shadow-sm" style="width: 500px" type="number" name="price" min="0" value="{{$product->price}}">
+                            @error('price')
+                                <div class="text-red-600">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <p class="mb-1 font-bold">Beschrijving</p>
+                        @error('description')
                             <div class="text-red-600">{{ $message }}</div>
                         @enderror
-                    </div>
-                    <div class="">
-                        <p class="mb-1 font-bold">Prijs</p>
-                        <input style="width: 500px" type="number" name="price" min="0" value="{{$product->price}}">
-                        @error('price')
-                            <div class="text-red-600">{{ $message }}</div>
-                        @enderror
+                        <textarea class="bg-gray-300 text-black placeholder-gray-500 resize-none border-none rounded-md shadow-sm p-2" style="width: 100%" name="description" id="" cols="30" rows="10">{{$product->description}}</textarea>
                     </div>
                 </div>
-                <div class="mt-8">
-                    <p class="mb-1 font-bold">Beschrijving</p>
-                    @error('description')
-                        <div class="text-red-600">{{ $message }}</div>
-                    @enderror
-                    <textarea style="width: 100%" name="description" id="" cols="30" rows="10">{{$product->description}}</textarea>
-                </div>
-
-                <div class="mt-8">
+                <div class="mt-8 bg-slate-200 p-4 shadow-lg rounded-md">
                     <p class="mb-1 font-bold">Specificatie</p>
                     <div class="flex gap-4 mb-4">
                         <div class="">
@@ -90,18 +91,22 @@
                         <p class="font-bold mt-8">Specificaties die worden verwijderd: <span class="text-red-600" id="delete-counter">0</span></p>
                     </div>
                 </div>
-                <div class="mt-8 w-72">
-                    <p class="mb-1 font-bold">Filters</p>
-                    @error('filters')
-                        <div class="text-red-600">{{ $message }}</div>
-                    @enderror
-                    <div class="grid grid-cols-3 gap-2">
-                        @foreach($filters as $filter)
-                            <div class="filter-input">
-                                <input type="checkbox" name="filters[]" value="{{$filter->id}}" {{ $product->filters->contains($filter) ? 'checked' : '' }}>
-                                <label for="filter">{{$filter->name}}</label>
+                <div class="mt-8 bg-slate-200 p-4 shadow-lg rounded-md">
+                    <div class="">
+                        <p class="mb-1 font-bold">Filters</p>
+                        @error('filters')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
+                        <div class="bg-gray-300 pl-2 pt-1 pb-8 pb-2 rounded-md shadow-sm ">
+                            <div class="grid grid-cols-3 gap-2 mt-8 w-72">
+                                @foreach($filters as $filter)
+                                    <div class="filter-input">
+                                        <input class="bg-gray-500 border-none rounded-md" type="checkbox" name="filters[]" value="{{$filter->id}}" {{ $product->filters->contains($filter) ? 'checked' : '' }}>
+                                        <label for="filter">{{$filter->name}}</label>
+                                    </div>
+                                @endforeach
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
                 <label class="mt-8 pt-8 pb-8 bg-cyan-100 shadow-lg" style="cursor: pointer; display: flex; justify-content: center;">
