@@ -7,6 +7,7 @@ use App\Models\Filter;
 use App\Models\Product;
 use App\Models\Specification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PDO;
 
 class ProductController extends Controller
@@ -150,6 +151,9 @@ class ProductController extends Controller
         foreach($amounts as $amount){
             $amount->delete();
         }
+
+        $disk = Storage::disk('public');
+        $disk->delete($product->img);
 
         $product->delete();
 
