@@ -5,8 +5,8 @@
         </div>
         @if(Auth::check() && Auth::user()->admin == true)   
         <div class="font-bold">
-            <a class="mr-1" href="">Producten</a>
-            <a class="mr-1" href="">Filters</a>
+            <a class="mr-1" href="{{route('admin.products.index')}}">Producten</a>
+            <a class="mr-1" href="{{route('filters.index')}}">Filters</a>
             <a class="mr-1" href="">Medewerkers</a>
             <a class="mr-1" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
 
@@ -28,7 +28,14 @@
               </svg>
             </button>
           </div>
+         @if(!Auth::check()) 
         <a class="font-bold" href="{{route('login')}}">Inloggen</a>
+        @else
+        <a class="font-bold" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        @endif
         @endif
     </div>
 </header>
