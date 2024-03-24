@@ -65,7 +65,17 @@ class FilterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $filter = Filter::find($id);
+        
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $filter->name = $request->name;
+        $filter->save();
+
+
+        return redirect()->route('filters.index');   
     }
 
     /**
@@ -73,6 +83,11 @@ class FilterController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $filter = Filter::find($id);
+
+        $filter->products()->detach();
+        $filter->delete();
+
+        return redirect()->route('filters.index');   
     }
 }

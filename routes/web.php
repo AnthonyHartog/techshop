@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('/admin/filters', FilterController::class)->middleware('auth');
 
 Route::get('products', [ProductController::class, 'index'])->name('product.index');
 Route::get('/products/{id}/{productName}', [ProductController::class, 'show'])->name('product.show');
@@ -36,6 +37,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admin/specification', SpecificationController::class);
 });
 
-Route::resource('/admin/filters', FilterController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

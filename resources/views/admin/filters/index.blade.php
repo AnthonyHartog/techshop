@@ -15,17 +15,17 @@
         <div class="grid gap-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
             @foreach($filters as $filter)
             <div class="bg-slate-200 p-4 shadow-lg rounded-md">
-                <form action="{{route('filters.update',$filter->id)}}" method="PUT" enctype="multipart/form-data">
+                <form action="{{route('filters.update',$filter->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                         <input class="bg-gray-300 text-black placeholder-gray-500 border-none rounded-md shadow-sm" style="width: 100%" type="text" name="name" value="{{$filter->name}}">
                         <div class="flex justify-between">
-                            <button class="mt-2 font-bold text-gray-600">Aanpassen</button>
+                            <button class="mt-2 font-bold text-gray-600" onclick="return confirm('Wil je deze filter echt aanpassen?')">Aanpassen</button>
                 </form>
                 <form method="POST" action="{{ route('filters.destroy', $filter->id) }}">
                     @csrf
                     @method('DELETE')
-                            <button class="mt-2 font-bold text-gray-600">Verwijderen</button>
+                            <button class="mt-2 font-bold text-gray-600" onclick="return confirm('Wil je deze filter echt verwijderen?')">Verwijderen</button>
                         </div>
                 </form>
             </div>
