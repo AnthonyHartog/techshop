@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="m-auto w-5/6 mt-8">
         <div class="border-b border-black mb-10">
-            <a class="text-xl" href="{{route('admin.products.create')}}">Nieuw product toevoegen</a>
+            <a class="text-xl" href="{{route('admin.products.create')}}">Nieuwe product toevoegen</a>
         </div>
         <div class="grid gap-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
             @foreach ($products as $product)

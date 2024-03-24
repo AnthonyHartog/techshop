@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecificationController;
@@ -34,5 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/admin/specification', SpecificationController::class);
 });
+
+Route::resource('/admin/filters', FilterController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
