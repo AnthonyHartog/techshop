@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Filter;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
@@ -89,5 +90,23 @@ class FilterController extends Controller
         $filter->delete();
 
         return redirect()->route('filters.index');   
+    }
+
+    public function productFilter(Request $request){
+        if($request->filters == null){
+            return redirect(route('product.index'));
+        }
+
+        $selectedFilters = [];
+        foreach($request->filters as $filter){
+            $selectedFilters[] = $filter;
+        }
+
+        $filters = Filter::all();
+        $products = Product::whereHas('filters', function($query) use ($request) {
+            $query->whereIn('name', $request->filters);
+        })->get();
+
+        return view('products.index', compact('filters', 'products', 'selectedFilters'));
     }
 }

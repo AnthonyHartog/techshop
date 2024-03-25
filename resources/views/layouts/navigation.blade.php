@@ -3,18 +3,6 @@
         <div class="logo">
             <h1>LOGO</h1>
         </div>
-        @if(Auth::check() && Auth::user()->admin == true)   
-        <div class="font-bold">
-            <a class="mr-1" href="{{route('admin.products.index')}}">Producten</a>
-            <a class="mr-1" href="{{route('filters.index')}}">Filters</a>
-            <a class="mr-1" href="">Medewerkers</a>
-            <a class="mr-1" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </div>
-        @else
         <div class="pt-2 relative mx-auto text-gray-600">
             <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
               type="search" name="search" placeholder="Search">
@@ -28,14 +16,23 @@
               </svg>
             </button>
           </div>
-         @if(!Auth::check()) 
-        <a class="font-bold" href="{{route('login')}}">Inloggen</a>
-        @else
-        <a class="font-bold" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @if(Auth::check() && Auth::user()->admin == true)   
+            <div class="font-bold">
+                <a class="mr-1" href="{{route('admin.products.index')}}">Producten</a>
+                <a class="mr-1" href="{{route('filters.index')}}">Filters</a>
+                <a class="mr-1" href="">Medewerkers</a>
+            </div>
+            @endif
+            @if(!Auth::check()) 
+                <a class="font-bold" href="{{route('login')}}">Inloggen</a>
+            @else
+                <a class="mr-1 font-bold" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
+        
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             @csrf
         </form>
-        @endif
         @endif
     </div>
 </header>

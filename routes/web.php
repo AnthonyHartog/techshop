@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('products', [ProductController::class, 'index'])->name('product.index');
 Route::get('/products/{id}/{productName}', [ProductController::class, 'show'])->name('product.show');
+Route::post('/products', [FilterController::class, 'productFilter'])->name('product.filter');
 
 Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');

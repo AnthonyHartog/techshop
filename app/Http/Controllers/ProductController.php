@@ -19,7 +19,8 @@ class ProductController extends Controller
     {
         $products = Product::all();
         $filters = Filter::all();
-        return view('products.index', compact('filters', 'products'));
+        $selectedFilters = null;
+        return view('products.index', compact('filters', 'products', 'selectedFilters'));
     }
 
         /**
