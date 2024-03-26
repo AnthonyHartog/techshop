@@ -116,7 +116,27 @@ class ShoppingcardController extends Controller
      */
     public function destroy(string $id)
     {
+        if(Cache::has('shoppingcard')){
+            $shoppingProducts = Cache::get('shoppingcard');
 
+            $numberInArray = 0;
+            foreach ($shoppingProducts as $product) {
+                if ($product['product_id'] == $id) {
+                    if(count($shoppingProducts) > 1){
+                        unset($shoppingProducts[$numberInArray]);               
+                        Cache::put('shoppingcard', $shoppingProducts);
+                    }else{
+                        Cache::forget('shoppingcard');
+                    }
+                    break;
+                }
+                $numberInArray++;
+            }
+
+        }
+
+
+        return redirect(route('shoppingcard.index'));
     }
 
     public function shoppingcardDelete(){
