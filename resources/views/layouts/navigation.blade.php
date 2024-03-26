@@ -24,9 +24,11 @@
                 </form>
             @csrf
         @endif
-        <div class="ml-3 cart relative bg-black p-1 w-14 rounded-lg">
-            <div class="counter rounded-full absolute -right-2 -top-2 text-black bg-white w-6 text-center">@if(Cache::has('shoppingcard')) {{ count(Cache::get('shoppingcard')) }} @else 0 @endif</div>
-            <img class="w-6 h-6 mx-auto" src="{{asset('img/cart.svg')}}" alt="cart.svg">
-        </div>
+        <a href="{{route('shoppingcard.index')}}">
+            <div class="ml-3 cart relative bg-black p-1 w-14 rounded-lg">
+                <div class="counter rounded-full absolute -right-2 -top-2 text-black bg-white w-6 text-center">@if(Cache::has('shoppingcard')) {{ count(Cache::get('shoppingcard')) }} @else 0 @endif</div>
+                <img class="w-6 h-6 mx-auto" src="{{asset('img/cart.svg')}}" alt="cart.svg">
+            </div>
+        </a>
     </div>
 </header>
