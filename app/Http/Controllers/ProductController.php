@@ -241,4 +241,18 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index');   
     }
+
+    public function storeInCar(Request $request){
+        $request->validate([
+            'product_id' => 'required',
+            'amount' => 'required|min:1|max:10'
+        ]);
+        
+        $productInfo = [
+            'product_id' => $request->product_id,
+            'amount' => $request->amount
+        ];
+
+        session()->put('product_info', $productInfo);
+    }
 }

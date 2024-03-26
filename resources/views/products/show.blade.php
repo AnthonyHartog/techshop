@@ -14,7 +14,13 @@
                     <p class="font-bold text-xl mb-4 mt-10" style="color: rgb(42, 184, 42)">€{{$product->price}}</p>
                     <p>{{$product->description}}</p>
                 </div>
-                <button class="bg-yellow-300 p-2 pr-4 pl-4 rounded-md mt-8 mb-4">In winkelmand toevoegen</button>
+                <form action="{{route('product.storeInCar')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                    <button class="bg-yellow-300 p-2 pr-4 pl-4 rounded-md mt-8 mb-4">In winkelmand toevoegen</button>
+                    <input type="number" name="amount" min="1" max="10" value="1" class="appearance-none rounded-md w-16 h-10 px-3 py-1 text-sm text-center border-gray-300 focus:outline-none focus:ring focus:border-blue-300">
+                </form>
+
                 <div class="mt-4">
                     <p><span class="font-bold text-green-500">Inclusief verzendkosten</span>, verstuurd door techshop</p>
                     <p>30 dagen bedenktijd en <span class="font-bold text-green-500">gratis</span> retourneren</p>

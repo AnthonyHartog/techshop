@@ -26,6 +26,10 @@ Route::get('products', [ProductController::class, 'index'])->name('product.index
 Route::get('/products/{id}/{productName}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/products', [FilterController::class, 'productFilter'])->name('product.filter');
 
+Route::middleware('auth')->group(function() {
+    Route::post('/storeInCar', [ProductController::class, 'storeInCar'])->name('product.storeInCar');
+});
+
 Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
