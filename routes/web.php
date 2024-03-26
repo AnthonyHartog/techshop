@@ -33,6 +33,7 @@ Route::resource('shoppingcard', ShoppingcardController::class);
 Route::get('/shoppingcards/delete', [ShoppingcardController::class, 'shoppingcardDelete'])->name('shoppingcards.delete');
 
 Route::resource('order', OrderController::class)->middleware('auth');
+Route::get('/order/completed/{id}/{email}', [OrderController::class, 'completed'])->name('order.completed');
 
 Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');

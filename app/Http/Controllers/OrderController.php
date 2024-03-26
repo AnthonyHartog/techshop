@@ -50,7 +50,7 @@ class OrderController extends Controller
 
             Cache::forget('shoppingcard');
 
-            return redirect(route('product.index'));
+            return redirect(route('order.completed', [$order->id, Auth::user()->email]));
         }
     }
 
@@ -89,5 +89,15 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function completed(string $id, string $email){
+        $order = Order::find($id);
+        if($order->count() > 0){
+            $user = Auth::user();
+            return view('orders.completed', compact('order', 'user'));
+        }else{
+            return redirect()->route('shoppingcard.index');
+        }
     }
 }

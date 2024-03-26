@@ -20,7 +20,7 @@
                 <form method="POST" action="{{ route('employee.destroy', $employee->id) }}">
                     @csrf
                     @method('DELETE')
-                            <button class="mt-2 font-bold text-gray-600" onclick="return confirm('Wil je deze filter echt verwijderen?')">Verwijderen</button>
+                            <button class="mt-2 font-bold text-gray-600" onclick="return confirm('Wil je echt de medewerker rechten weg halen?')">Verwijderen</button>
                         </div>
                 </form>
             </div>
