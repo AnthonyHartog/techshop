@@ -2,7 +2,7 @@
     <div class="m-auto w-5/6 mt-8">
         <div class="flex justify-center">
             <div class="rounded-md shadow-sm p-1 p-4 mr-8 mb-12" style="background-color: rgb(226 232 240);">
-                <h1 class="font-bold text-2xl text-center mb-4">Jouw bestellingen</h1>
+                <h1 class="font-bold text-2xl text-center mb-4">Jouw bestelling</h1>
                 <div class="grid gap-4 flex" style="grid-template-columns: repeat(1, minmax(0, 1fr));">
                     @foreach($order->amounts as $amount)
                     <div class="rounded-md p-2" style="background-color: rgb(209 213 219);">

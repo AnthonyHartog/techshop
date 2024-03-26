@@ -77,14 +77,14 @@ class ShoppingcardController extends Controller
                 $products[] = $productInfo;
             }
 
-            Cache::put('shoppingcard', $products); // Opslaan van de bijgewerkte gegevens in de cache
+            Cache::put('shoppingcard', $products);
         } else {
             $productInfo = [
                 'product_id' => $request->product_id,
                 'amount' => $request->amount
             ];
         
-            Cache::put('shoppingcard', [$productInfo]); // Opslaan van de initiële gegevens in de cache
+            Cache::put('shoppingcard', [$productInfo]);
         }
         
         return redirect(route('shoppingcard.index'));

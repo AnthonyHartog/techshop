@@ -32,7 +32,7 @@
                 // Verander de achtergrondafbeelding van de banner
                 currentIndex = (currentIndex + 1) % images.length;
                 banner.style.backgroundImage = "url('" + images[currentIndex] + "')";
-            }, 10000); // Elke 10 seconden
+            }, 10000);
         });
     </script>
 </x-app-layout>
