@@ -3,6 +3,7 @@
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShoppingcardController;
 use App\Http\Controllers\SpecificationController;
 use App\Http\Middleware\CheckAdmin;
 use App\Models\Specification;
@@ -26,9 +27,7 @@ Route::get('products', [ProductController::class, 'index'])->name('product.index
 Route::get('/products/{id}/{productName}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/products', [FilterController::class, 'productFilter'])->name('product.filter');
 
-Route::middleware('auth')->group(function() {
-    Route::post('/storeInCar', [ProductController::class, 'storeInCar'])->name('product.storeInCar');
-});
+Route::resource('shoppingcard', ShoppingcardController::class)->middleware('auth');
 
 Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');

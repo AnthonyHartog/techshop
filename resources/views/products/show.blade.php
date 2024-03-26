@@ -14,7 +14,7 @@
                     <p class="font-bold text-xl mb-4 mt-10" style="color: rgb(42, 184, 42)">€{{$product->price}}</p>
                     <p>{{$product->description}}</p>
                 </div>
-                <form action="{{route('product.storeInCar')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('shoppingcard.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="product_id" value="{{$product->id}}">
                     <button class="bg-yellow-300 p-2 pr-4 pl-4 rounded-md mt-8 mb-4">In winkelmand toevoegen</button>
