@@ -14,17 +14,20 @@ class ShoppingcardController extends Controller
     public function index()
     {
         $products = [];
+        $totalPrice = 0;
         if(Cache::has('shoppingcard')){
             foreach(Cache::get('shoppingcard') as $product){
+                $productModel =  Product::find($product['product_id']);
+                $totalPrice += $productModel->price * $product['amount'];
 
                 $products[] = [
-                        'product' => Product::find($product['product_id']),
+                        'product' => $productModel,
                         'amount' => $product[ 'amount']
                 ];
             }
         }
 
-        return view('shoppingcard.index', compact('products'));
+        return view('shoppingcard.index', compact('products', 'totalPrice'));
     }
 
     /**
