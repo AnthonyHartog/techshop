@@ -47,8 +47,11 @@
                 <div class="mt-4">
                     <p>Totaal te betalen</p>
                     <p style="color: rgb(42, 184, 42)" class="font-bold">€{{$totalPrice}}</p>
-                    <div class="mt-4">
-                        <a class="bg-cyan-300 p-1 pr-4 pl-4 rounded-md mt-6 mb-4" href="{{route('product.index')}}">Ga verder met betalen</a>
+                    <div class="mt-1">
+                        <form action="{{route('order.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <button class="bg-cyan-300 p-1 pr-4 pl-4 rounded-md mt-6 mb-4">Ga verder met betalen</button>
+                        </form>
                     </div>
                 </div>
             </div>

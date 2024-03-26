@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FilterController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingcardController;
@@ -29,6 +30,8 @@ Route::post('/products', [FilterController::class, 'productFilter'])->name('prod
 
 Route::resource('shoppingcard', ShoppingcardController::class);
 Route::get('/shoppingcards/delete', [ShoppingcardController::class, 'shoppingcardDelete'])->name('shoppingcards.delete');
+
+Route::resource('order', OrderController::class)->middleware('auth');
 
 Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');
