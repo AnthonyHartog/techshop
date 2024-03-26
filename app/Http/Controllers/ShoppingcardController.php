@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ShoppingcardController extends Controller
 {
@@ -11,7 +13,18 @@ class ShoppingcardController extends Controller
      */
     public function index()
     {
-        //
+        $products = [];
+        if(Cache::has('shoppingcard')){
+            foreach(Cache::get('shoppingcard') as $product){
+
+                $products[] = [
+                        'product' => Product::find($product['product_id']),
+                        'amount' => $product[ 'amount']
+                ];
+            }
+        }
+
+        return view('shoppingcard.index', compact('products'));
     }
 
     /**
@@ -31,13 +44,47 @@ class ShoppingcardController extends Controller
             'product_id' => 'required',
             'amount' => 'required|min:1|max:10'
         ]);
-        
-        $productInfo = [
-            'product_id' => $request->product_id,
-            'amount' => $request->amount
-        ];
 
-        session()->put('product_info', $productInfo);
+        if (Cache::has('shoppingcard')) {
+            $productInfo = [
+                'product_id' => $request->product_id,
+                'amount' => $request->amount
+            ];
+        
+            $products = Cache::get('shoppingcard', []);
+
+            $productIsAviable = false;
+            $numberInArray = 0;
+            foreach ($products as $product) {
+                if ($product['product_id'] == $productInfo['product_id']) {
+                    $newAmount = $product['amount'] + $request->amount;
+                    if($newAmount > 10){
+                        $newAmount = 10;
+                    }
+
+                    $products[$numberInArray]['amount'] = $newAmount;
+
+                    $productIsAviable = true;
+                    break;
+                }
+                $numberInArray++;
+            }
+
+            if(!$productIsAviable){
+                $products[] = $productInfo;
+            }
+
+            Cache::put('shoppingcard', $products); // Opslaan van de bijgewerkte gegevens in de cache
+        } else {
+            $productInfo = [
+                'product_id' => $request->product_id,
+                'amount' => $request->amount
+            ];
+        
+            Cache::put('shoppingcard', [$productInfo]); // Opslaan van de initiële gegevens in de cache
+        }
+        
+        return redirect(route('shoppingcard.index'));
     }
 
     /**
@@ -69,6 +116,12 @@ class ShoppingcardController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+    }
+
+    public function shoppingcardDelete(){
+        Cache::forget('shoppingcard');
+
+        return redirect(route('shoppingcard.index'));
     }
 }

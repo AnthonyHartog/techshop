@@ -27,7 +27,8 @@ Route::get('products', [ProductController::class, 'index'])->name('product.index
 Route::get('/products/{id}/{productName}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/products', [FilterController::class, 'productFilter'])->name('product.filter');
 
-Route::resource('shoppingcard', ShoppingcardController::class)->middleware('auth');
+Route::resource('shoppingcard', ShoppingcardController::class);
+Route::get('/shoppingcards/delete', [ShoppingcardController::class, 'shoppingcardDelete'])->name('shoppingcards.delete');
 
 Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products.index');
