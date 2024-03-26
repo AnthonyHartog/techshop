@@ -25,7 +25,7 @@
             @endif
 
             <!-- Page Content -->
-            <main style="min-height: 100vh;">
+            <main class="min-h-screen">
                 {{ $slot }}
             </main>
 
