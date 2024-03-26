@@ -1,7 +1,7 @@
 <footer class="bg-cyan-600">
         <div class="flex justify-between items-center m-auto w-5/6 pt-4 pb-4">
             <div class="logo">
-                <a href="{{route('product.index')}}">LOGO</a>
+                <a href="/">LOGO</a>
             </div>
             <div class="flex flex-col text-center">
                 <p class="font-bold">Links</p>
