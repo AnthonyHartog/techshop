@@ -4,15 +4,18 @@
             <a href="{{route('product.index')}}">LOGO</a>
         </div>
         <div class="pt-2 relative mx-auto text-gray-600">
-            @if(Auth::check() && Auth::user()->admin == true)   
             <div class="font-bold text-black">
-                <a class="mr-1" href="{{route('admin.products.index')}}">Producten</a>
-                <a class="mr-1" href="{{route('filters.index')}}">Filters</a>
-                <a href="">Medewerkers</a>
+                @if(Auth::check() && Auth::user()->admin == true)   
+                    <a class="mr-1" href="{{route('admin.products.index')}}">Producten</a>
+                    <a class="mr-1" href="{{route('filters.index')}}">Filters</a>
+                    <a href="mr-1">Medewerkers</a>
+                @else
+                <a href="{{route('product.index')}}">Producten</a>
+                @endif
+                @if(Auth::check())
+                    <a class="ml-1" href="{{route('order.index')}}">Bestellingen</a>
+                @endif
             </div>
-            @else
-            <a class="mr-1 text-black" href="{{route('product.index')}}">Producten</a>
-            @endif
           </div>
             @if(!Auth::check()) 
                 <a class="font-bold" href="{{route('login')}}">Inloggen</a>
