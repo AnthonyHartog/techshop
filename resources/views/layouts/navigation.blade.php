@@ -19,12 +19,20 @@
           </div>
             @if(!Auth::check()) 
                 <a class="font-bold" href="{{route('login')}}">Inloggen</a>
-            @else
-                <a class="font-bold" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a>
-        
+            @else        
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+                <ul class="menu menu-horizontal px-1">                    <li>
+                      <details>
+                        <summary class="font-bold">{{Auth::user()->name}}</summary>
+                        <ul class="p-2">
+                            <li><a href="{{route('profile.edit')}}">Profiel</a></li>
+                          <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Uitloggen</a></li>
+                        </ul>
+                      </details>
+                    </li>
+                  </ul>
             @csrf
         @endif
         <a href="{{route('shoppingcard.index')}}">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,14 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        $orders = Order::where('user_id', $user->id)->get();
+        foreach($orders as $order){
+            foreach($order->amounts as $amount){
+                $amount->delete();
+            }
+            $order->delete();
+        }
+
         Auth::logout();
 
         $user->delete();
@@ -55,6 +64,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect()->route('product.index');
     }
 }
