@@ -1,4 +1,4 @@
-<header class="bg-cyan-600 "> 
+<header class="bg-cyan-600"> 
     <div class="flex justify-between items-center m-auto w-5/6 pt-4 pb-4">
         <div class="logo">
             <a href="{{route('product.index')}}">LOGO</a>

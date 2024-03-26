@@ -25,8 +25,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main style="min-height: 100vh;">
                 {{ $slot }}
             </main>
+
+            @include('layouts.footer')
     </body>
 </html>
