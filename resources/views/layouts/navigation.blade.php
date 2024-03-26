@@ -8,7 +8,7 @@
                 @if(Auth::check() && Auth::user()->admin == true)   
                     <a class="mr-1" href="{{route('admin.products.index')}}">Producten</a>
                     <a class="mr-1" href="{{route('filters.index')}}">Filters</a>
-                    <a href="mr-1">Medewerkers</a>
+                    <a href="{{route('employee.index')}}">Medewerkers</a>
                 @else
                 <a href="{{route('product.index')}}">Producten</a>
                 @endif

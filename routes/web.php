@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -42,8 +43,8 @@ Route::middleware('auth', CheckAdmin::class)->group(function () {
     Route::delete('/admin/delete/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::resource('/admin/specification', SpecificationController::class);
-
     Route::resource('/admin/filters', FilterController::class);
+    Route::resource('/admin/employee', EmployeeController::class);
 });
 
 
