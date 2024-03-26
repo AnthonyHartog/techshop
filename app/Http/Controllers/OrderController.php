@@ -57,9 +57,14 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Order $order)
     {
-        //
+        $totalPrice = 0;
+        foreach($order->amounts as $amount){
+            $totalPrice = $amount->product->price * $amount->amount;
+        }
+
+        return view('orders.show', compact('order', 'totalPrice'));
     }
 
     /**
