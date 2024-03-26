@@ -9,7 +9,9 @@
                 <a href="{{route('admin.products.edit', [$product->id, $product->name])}}">
                     <div class="shadow-lg p-4">
                         <div class="up">
-                            <img class="" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
+                            <div style="height:200px;">
+                                <img class="mt-1 mb-1" style="height:100%; witdh: 100%; object-fit: contain" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
+                            </div>
                             <div class="flex justify-between">
                                 <p >{{ $product->name }}</p>
                                 <p style="color: rgb(42, 184, 42)">€{{ $product->price }}</p>

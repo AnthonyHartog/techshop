@@ -1,12 +1,12 @@
 <x-app-layout>
-    <div class="flex flex-row m-auto w-5/6 mt-8">
+    <div class="flex flex-row m-auto w-5/6 mt-8 pb-10">
         <div class="grid gap-4" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
             <div>
                 <div class="text-center">
                     <h1 class="text-2xl font-bold">{{$product->name}}</h1>
                 </div>
-                <div class="shadow-xl p-4">
-                    <img class="" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
+                <div style="height: 400px;" class="shadow-xl p-4">
+                    <img class="" style="height: 100%; witdh: 100%; object-fit: contain" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
                 </div>
             </div>
             <div class="information">

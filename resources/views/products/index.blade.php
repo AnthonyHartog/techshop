@@ -4,10 +4,10 @@
             <div class="bg-slate-200 p-4 shadow-lg rounded-md mr-8 p-4">
                 <form action="{{route('product.filter')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="bg-gray-300 text-black placeholder-gray-500 border-none rounded-md shadow-sm p-1">
+                    <div class="bg-gray-300 text-black placeholder-gray-500 rounded-md shadow-sm p-1">
                         @foreach($filters as $filter)
                         <div class="filter">
-                            <input type="checkbox" class="bg-gray-500 border-none rounded-md" name="filters[]" value="{{$filter->name}}" {{ is_array($selectedFilters) && in_array($filter->name, $selectedFilters) ? 'checked' : '' }}>
+                            <input type="checkbox" class="bg-gray-500 rounded-md" name="filters[]" value="{{$filter->name}}" {{ is_array($selectedFilters) && in_array($filter->name, $selectedFilters) ? 'checked' : '' }}>
                             <label for="filter">{{$filter->name}}</label>
                         </div>
                         @endforeach
@@ -21,7 +21,9 @@
                 @foreach ($products as $product)
                 <a href="{{route('product.show', [$product->id, $product->name])}}">
                     <div class="shadow-lg p-4">
-                        <img class="mt-1 mb-1" style="height:200px;" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
+                        <div style="height:200px;">
+                            <img class="mt-1 mb-1" style="height:100%; witdh: 100%; object-fit: contain" src="{{asset('storage/' . $product->img)}}" alt="{{ $product->name }}">
+                        </div>
                         <div class="flex justify-between">
                             <p >{{ $product->name }}</p>
                             <p style="color: rgb(42, 184, 42)">€{{ $product->price }}</p>
